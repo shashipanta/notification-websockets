@@ -1,0 +1,19 @@
+# database setup
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://172.21.0.2:5432/notification_db
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        generate_statistics: true
+        format_sql: true
+
+
+
+
