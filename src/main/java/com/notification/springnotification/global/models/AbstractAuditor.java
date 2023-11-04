@@ -1,10 +1,9 @@
 package com.notification.springnotification.global.models;
 
 import com.notification.springnotification.global.enums.Status;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -18,6 +17,8 @@ import java.sql.Timestamp;
  * @version 1.0.0
  * @since 11/3/23 10:35 PM
  */
+@Getter
+@Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class AbstractAuditor {
@@ -43,5 +44,6 @@ public class AbstractAuditor {
     private Boolean isActive = Boolean.TRUE;
 
     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status = Status.APPROVED;
 }
