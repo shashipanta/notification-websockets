@@ -9,10 +9,17 @@ spring:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+    # Session Metrics : JDBC connections, L2C puts, hits, misses, Flushes, partial-flushes
     properties:
       hibernate:
         generate_statistics: true
         format_sql: true
+logging:
+  level:
+    # spring security logging
+    org:
+      springframework:
+        security: debug
 
 
 
