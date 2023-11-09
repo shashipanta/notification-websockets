@@ -13,12 +13,14 @@ public class BaseController {
     private final String FAILURE = "failure";
 
     public GlobalApiResponse successResponse(String message, Object data) {
-        return GlobalApiResponse
+        GlobalApiResponse build = GlobalApiResponse
                 .builder()
                 .statusCode(SUCCESS)
                 .data(data)
                 .message(message)
                 .build();
+        return build;
+
 
     }
 }

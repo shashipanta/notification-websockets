@@ -3,6 +3,17 @@ package com.notification.springnotification.authentication.config.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.web.cors.reactive.CorsUtils;
+import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import org.springframework.web.server.WebFilterChain;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 11/6/23 9:18 PM
  */
 @Configuration
-public class CorsConfiguration {
+public class WebMvcConfig implements WebMvcConfigurer{
 
     private static final String ALLOWED_HEADERS = "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN";
     private static final String ALLOWED_METHODS = "GET, PUT, POST, DELETE, OPTIONS";
@@ -21,21 +32,20 @@ public class CorsConfiguration {
     private static final String ALLOWED_ORIGIN = "http://localhost:5173";
 
     @Value("${cors.allowed-origins}")
-    private String allowedOrigin;
+    private String allowedOrigins;
 
-    @Bean
-    WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry
-                        .addMapping("/**")
-                        .allowedOrigins(ALLOWED_ORIGIN)
-                        .allowedHeaders(ALLOWED_HEADERS)
-                        .allowedMethods(ALLOWED_METHODS)
-                        .exposedHeaders(ALLOWED_HEADERS)
-                        .maxAge(MAX_AGE);
-            }
-        };
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        // "http://127.0.0.1:5173"
+        registry
+                .addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//                .allowedHeaders(ALLOWED_HEADERS)
+                .allowedHeaders("Content-Type","x-requested-with", "Credential", "X-XSRF-TOKEN", "authorization", "Authorization")
+                .exposedHeaders("*")
+                .allowCredentials(true)
+                .maxAge(MAX_AGE);
     }
+
 }

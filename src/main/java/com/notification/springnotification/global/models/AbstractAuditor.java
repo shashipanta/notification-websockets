@@ -26,7 +26,7 @@ public class AbstractAuditor {
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
-    private Integer createdBy;
+    private Long createdBy;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -34,7 +34,7 @@ public class AbstractAuditor {
 
     @LastModifiedBy
     @Column(name = "last_modified_by")
-    private Integer lastModifiedBy;
+    private Long lastModifiedBy;
 
     @LastModifiedDate
     @Column(name = "last_modified_at")
