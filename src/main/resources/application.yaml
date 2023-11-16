@@ -1,0 +1,26 @@
+# database setup
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://172.21.0.2:5432/notification_db
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    # Session Metrics : JDBC connections, L2C puts, hits, misses, Flushes, partial-flushes
+    properties:
+      hibernate:
+        generate_statistics: true
+        format_sql: true
+logging:
+  level:
+    # spring security logging
+    org:
+      springframework:
+        security: debug
+
+
+
+
