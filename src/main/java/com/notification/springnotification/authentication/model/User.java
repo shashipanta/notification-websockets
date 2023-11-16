@@ -1,5 +1,7 @@
 package com.notification.springnotification.authentication.model;
 
+import com.notification.springnotification.authentication.dto.response.UserResponse;
+import com.notification.springnotification.globals.auditor.AbstractAuditor;
 import com.notification.springnotification.globals.enums.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,11 +9,17 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+
+import static org.springframework.util.ClassUtils.isPresent;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends AbstractAuditor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_gen")
     @SequenceGenerator(name = "users_id_gen", sequenceName = "users_seq", allocationSize = 1)
@@ -28,7 +36,7 @@ public class User {
     private String allowedIp;
 
     @Column(name = "allowed_login_failure", nullable = false)
-    private Short allowedLoginFailure;
+    private Short allowedLoginFailure = 20;
 
     @Column(name = "credentials_non_expired", nullable = false)
     private Boolean credentialsNonExpired = false;
@@ -44,10 +52,5 @@ public class User {
 
     @Column(name = "user_name", nullable = false, length = 150)
     private String userName;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    private Status status;
 
 }
