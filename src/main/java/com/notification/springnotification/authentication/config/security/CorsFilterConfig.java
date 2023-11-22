@@ -19,8 +19,7 @@ import java.io.IOException;
  * @since 11/9/23 10:27 AM
  */
 
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+
 public class CorsFilterConfig implements Filter {
 
     private static final String ALLOWED_HEADERS = "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN";

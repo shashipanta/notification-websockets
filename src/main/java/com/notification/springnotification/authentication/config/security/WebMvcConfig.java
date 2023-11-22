@@ -39,7 +39,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
         // "http://127.0.0.1:5173"
         registry
                 .addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins(allowedOrigins)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 //                .allowedHeaders(ALLOWED_HEADERS)
                 .allowedHeaders("Content-Type","x-requested-with", "Credential", "X-XSRF-TOKEN", "authorization", "Authorization")

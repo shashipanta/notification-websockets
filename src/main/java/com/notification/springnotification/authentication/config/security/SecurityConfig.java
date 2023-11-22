@@ -88,6 +88,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests ->
                         requests.requestMatchers("/api/v1/products/**")
                                 .permitAll()
+                                .requestMatchers("api/v1/auth/**", "/error")
+                                .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 );

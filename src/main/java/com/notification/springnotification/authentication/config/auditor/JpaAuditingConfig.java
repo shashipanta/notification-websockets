@@ -29,7 +29,7 @@ public class JpaAuditingConfig {
     /**
      * <h1>Get logged In userId for Auditing purpose</h1>
      *
-     * @return 0 if user is anonymous -1 probably never and useId if user is loggedIn
+     * @return 0 if user is anonymous and <code>userId</code> if user is loggedIn
      */
     @Bean
     protected AuditorAware<Long> auditorProvider() {
